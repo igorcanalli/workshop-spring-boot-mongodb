@@ -15,14 +15,14 @@ import com.canalli.workshopmongo.services.exception.ObjectNotFoundException;
 public class UserService {
 	
 	@Autowired
-	public UserRepository repositorio;
+	public UserRepository repository;
 	
 	public List<User> findAll(){
-		return repositorio.findAll();
+		return repository.findAll();
 	}
 	
 	public User findById(String id){
-		Optional<User> user = repositorio.findById(id);
+		Optional<User> user = repository.findById(id);
 		if(!user.isPresent()) {
 			throw new ObjectNotFoundException("Objeto não encontrado.");
 		}
@@ -30,21 +30,21 @@ public class UserService {
 	}
 	
 	public User insert(User obj) {
-		return repositorio.insert(obj);
+		return repository.insert(obj);
 	}
 	
 	public void delete(String id) {
 		findById(id);
 		
-		repositorio.deleteById(id);
+		repository.deleteById(id);
 	}
 	
 	public User update(User obj) {
-		User newObj = repositorio.findById(obj.getId()).get();
+		User newObj = repository.findById(obj.getId()).get();
 		
 		updateData(newObj, obj);
 		
-		return repositorio.save(obj);
+		return repository.save(obj);
 	}
 	
 	public void updateData(User newObj, User obj) {
