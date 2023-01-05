@@ -1,13 +1,15 @@
 package com.canalli.workshopmongo.repository;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import com.canalli.workshopmongo.domain.Post;
-import com.canalli.workshopmongo.domain.User;
 
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {
+	
+	List<Post> findByTitleContainingIgnoreCase(String text);
 
 }
